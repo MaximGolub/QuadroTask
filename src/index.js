@@ -13,7 +13,7 @@ let detail = {
   const app = document.getElementById("app");
   const heightInput = document.getElementById("heightInput");
   const widthInput = document.getElementById("widthInput");
-  const leftAngleInput = document.getElementById("leftAngleInput");
+  const rightAngleInput = document.getElementById("rightAngleInput");
   const rotateZ = document.getElementById("rotateZ");
   const draw = document.getElementById("draw");
 
@@ -49,9 +49,17 @@ let detail = {
       ctx.stroke();
       ctx.closePath();
     }
+  }
+
+  function rotateDetail() {
+    ctx.translate(canvas.width, 0);
+    ctx.rotate((Math.PI / 180) * 90);
 
     drawDetail();
-
-    draw.addEventListener("click", drawDetail);
   }
+
+  drawDetail();
+
+  draw.addEventListener("click", drawDetail);
+  rotateZ.addEventListener("click", rotateDetail);
 }
