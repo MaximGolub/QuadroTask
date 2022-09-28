@@ -197,18 +197,64 @@ require("./styles.css");
 var detail = {
   length: 350,
   width: 250,
-  lt: {},
-  lb: {},
+  lt: {
+    radius: 0
+  },
+  lb: {
+    radius: 0
+  },
   rt: {
     radius: 50
   },
-  rb: {}
+  rb: {
+    radius: 0
+  }
 };
 {
-  //your code here....
   var app = document.getElementById("app");
-  var leftAngleInput = document.getElementById("leftAngleInput");
+  var heightInput = document.getElementById("heightInput");
+  var widthInput = document.getElementById("widthInput");
+  var rightAngleInput = document.getElementById("rightAngleInput");
   var rotateZ = document.getElementById("rotateZ");
+  var draw = document.getElementById("draw");
+  var canvas = document.getElementById("canvas");
+  var ctx = canvas.getContext("2d");
+  canvas.width = 400;
+  canvas.height = 400;
+
+  function drawDetail() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    if (heightInput.value === "" || widthInput.value === "" || rightAngleInput.value === "") {
+      ctx.beginPath();
+      ctx.moveTo(0, 0);
+      ctx.lineTo(0, detail.width);
+      ctx.lineTo(detail.length, detail.width);
+      ctx.arcTo(detail.length, 0, 0, 0, detail.rt.radius);
+      ctx.lineTo(0, 0);
+      ctx.stroke();
+      ctx.closePath();
+    } else {
+      ctx.beginPath();
+      ctx.moveTo(0, 0);
+      ctx.lineTo(0, widthInput.value);
+      ctx.lineTo(heightInput.value, widthInput.value);
+      ctx.arcTo(heightInput.value, 0, 0, 0, rightAngleInput.value);
+      ctx.lineTo(0, 0);
+      ctx.stroke();
+      ctx.closePath();
+    }
+  }
+
+  function rotateDetail() {
+    ctx.translate(canvas.width, 0);
+    ctx.rotate(Math.PI / 180 * 90);
+    drawDetail();
+  }
+
+  drawDetail();
+  draw.addEventListener("click", drawDetail);
+  rotateZ.addEventListener("click", rotateDetail);
 }
 },{"./styles.css":"src/styles.css"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -238,7 +284,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54806" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51875" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
